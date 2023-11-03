@@ -24,7 +24,7 @@ pub(crate) struct CarriageDetails {
     carriage_sequence: i64,
     pub(crate) id: Option<String>,
     pub(crate) label: String,
-    pub(crate) occupancy_percentage: i64,
+    pub(crate) occupancy_percentage: Option<i64>,
     pub(crate) occupancy_status: String,
 }
 
