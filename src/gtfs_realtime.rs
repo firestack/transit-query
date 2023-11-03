@@ -43,7 +43,7 @@ pub(crate) struct VehiclePosition {
     pub(crate) multi_carriage_details: Option<Vec<CarriageDetails>>,
     pub(crate) position: Position,
     pub(crate) stop_id: Option<String>,
-    pub(crate) timestamp: i64,
+    pub(crate) timestamp: Option<i64>,
     pub(crate) trip: Option<Trip>,
     pub(crate) vehicle: VehicleDescriptor,
 }
