@@ -36,7 +36,7 @@ fn main() {
     let contents = get_feed("https://cdn.mbta.com/realtime/VehiclePositions.json");
     let trip_updates = get_feed("https://cdn.mbta.com/realtime/TripUpdates.json");
     let schedule = GtfsSchedule::from_path(&args.gtfs_path);
-    let adapter: Adapter<'_> = Adapter::new(&contents, &trip_updates, &schedule);
+    let adapter = Adapter::new(&contents, &trip_updates, &schedule);
     let variables: BTreeMap<Arc<str>, Arc<str>> = BTreeMap::new(); // btreemap! {Arc::from("minLabel") => Arc::from("3900")};
     execute_query(Adapter::schema(), adapter.into(), &file_contents, variables)
         .expect("query failed to parse")
