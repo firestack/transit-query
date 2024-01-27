@@ -26,8 +26,9 @@ fn deserialize_file<T>(path: &Path, file: &str) -> Vec<T>
 where
     T: DeserializeOwned,
 {
-    let text = fs::read_to_string(path.join(Path::new(file)))
-        .unwrap_or_else(|_| panic!("couldn't read {}", file));
+    let file_path = path.join(Path::new(file));
+    let text = fs::read_to_string(&file_path)
+        .unwrap_or_else(|_| panic!("couldn't read {}", file_path.display()));
     deserialize(file, text)
 }
 
