@@ -5,10 +5,11 @@ use crate::{
 
 #[non_exhaustive]
 #[derive(Debug, Clone, trustfall::provider::TrustfallEnumVertex)]
-pub enum Vertex<'a> {
+pub(crate) enum Vertex<'a> {
     Route(&'a Route),
     Stop(&'a Stop),
     Trip(&'a Trip),
+    #[allow(dead_code)]
     TripDescriptor(&'a TripDescriptor),
     Vehicle(&'a VehiclePosition),
     CarriageDetails(&'a CarriageDetails),

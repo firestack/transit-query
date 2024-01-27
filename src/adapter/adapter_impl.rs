@@ -19,16 +19,17 @@ static SCHEMA: OnceLock<Schema> = OnceLock::new();
 
 #[non_exhaustive]
 #[derive(Debug)]
-pub struct Adapter<'a> {
+pub(crate) struct Adapter<'a> {
     vehicle_positions: &'a VehiclePositions,
+    #[allow(dead_code)]
     trip_updates: &'a TripUpdates,
     gtfs_schedule: &'a GtfsSchedule,
 }
 
 impl<'a> Adapter<'a> {
-    pub const SCHEMA_TEXT: &'static str = include_str!("./schema.gql");
+    pub(crate) const SCHEMA_TEXT: &'static str = include_str!("./schema.gql");
 
-    pub fn schema() -> &'static Schema {
+    pub(crate) fn schema() -> &'static Schema {
         SCHEMA.get_or_init(|| Schema::parse(Self::SCHEMA_TEXT).expect("not a valid schema"))
     }
 
