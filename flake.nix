@@ -65,6 +65,8 @@
 						Security
 						SystemConfiguration
 					]);
+
+					GTFS_STATIC = self.packages.${system}.mbta-gtfs;
 				};
 
 				craneLibLLvmTools = craneLib.overrideToolchain

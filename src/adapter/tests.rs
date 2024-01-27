@@ -10,7 +10,9 @@ use super::Adapter;
 fn adapter_satisfies_trustfall_invariants() {
     let vehicles = deserialize_feed(include_str!("../../test_data/VehiclePositions.json"));
     let trips = deserialize_feed(include_str!("../../test_data/TripUpdates.json"));
-    let schedule = GtfsSchedule::from_path(Path::new("../MBTA_GTFS"));
+    let schedule = GtfsSchedule::from_path(Path::new(
+        &std::env::var_os("GTFS_STATIC").expect("GTFS_STATIC env var should be present"),
+    ));
 
     let adapter = Adapter::new(&vehicles, &trips, &schedule);
     let schema = Adapter::schema();
