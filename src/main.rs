@@ -5,7 +5,7 @@ use std::{
 };
 
 use gtfs_schedule::GtfsSchedule;
-use maplit::btreemap;
+
 use serde::de::DeserializeOwned;
 use trustfall::{execute_query, TransparentValue};
 
@@ -27,15 +27,13 @@ struct CliArgs {
 fn main() {
     let args = CliArgs::parse();
 
-    let file_contents = std::fs::read_to_string(&args.query_file).expect(&format!(
-        "Could not open file {}",
-        args.query_file.display()
-    ));
+    let file_contents = std::fs::read_to_string(&args.query_file)
+        .unwrap_or_else(|_| panic!("Could not open file {}", args.query_file.display()));
 
     let contents = get_feed("https://cdn.mbta.com/realtime/VehiclePositions.json");
     let trip_updates = get_feed("https://cdn.mbta.com/realtime/TripUpdates.json");
     let schedule = GtfsSchedule::from_path(Path::new("../MBTA_GTFS"));
-    let adapter: Adapter = Adapter::new(&contents, &trip_updates, &schedule);
+    let adapter: Adapter<'_> = Adapter::new(&contents, &trip_updates, &schedule);
     let variables: BTreeMap<Arc<str>, Arc<str>> = BTreeMap::new(); // btreemap! {Arc::from("minLabel") => Arc::from("3900")};
     execute_query(Adapter::schema(), adapter.into(), &file_contents, variables)
         .expect("query failed to parse")

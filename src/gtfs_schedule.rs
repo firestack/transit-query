@@ -4,9 +4,9 @@ use serde::{de::DeserializeOwned, Deserialize, Serialize};
 
 #[derive(Debug)]
 pub(crate) struct GtfsSchedule {
-    pub routes: Vec<Route>,
-    pub stops: Vec<Stop>,
-    pub trips: Vec<Trip>,
+    pub(crate) routes: Vec<Route>,
+    pub(crate) stops: Vec<Stop>,
+    pub(crate) trips: Vec<Trip>,
 }
 
 impl GtfsSchedule {
@@ -42,20 +42,20 @@ where
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Route {
+pub(crate) struct Route {
     pub(super) route_id: String,
     pub(super) route_long_name: String,
     pub(super) route_short_name: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Stop {
+pub(crate) struct Stop {
     pub(super) stop_id: String,
     pub(super) stop_name: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct Trip {
+pub(crate) struct Trip {
     pub(super) route_id: String,
     pub(super) service_id: Option<String>,
     pub(super) trip_id: String,

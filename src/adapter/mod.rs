@@ -7,5 +7,6 @@ mod vertex;
 #[cfg(test)]
 mod tests;
 
-pub use adapter_impl::Adapter;
-pub use vertex::Vertex;
+pub(crate) use adapter_impl::Adapter;
+#[allow(unused_imports)]
+pub(crate) use vertex::Vertex;
