@@ -20,7 +20,7 @@ use clap::Parser;
 
 #[derive(Parser, Debug)]
 struct CliArgs {
-    #[arg(default_value = "./query.gql")]
+    #[arg(default_value = "./query.gql", env = "QUERY_FILE")]
     query_file: PathBuf,
 }
 
