@@ -47,13 +47,15 @@ type Trip {
   id: String!
   direction_id: Int
   trip_headsign: String
+  """
   start_time: String
   start_date: String
   schedule_relationship: String
   timestamp: Int
+  vehicles: [Vehicle!]
+  """
 
   route: Route
-  vehicles: [Vehicle!]
 }
 
 type Vehicle {

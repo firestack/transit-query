@@ -59,7 +59,7 @@ mod trip {
         _resolve_info: &ResolveEdgeInfo,
     ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Vertex<'a>>> {
         resolve_neighbors_with(contexts, |vertex| {
-            let vertex = vertex
+            let _vertex = vertex
                 .as_trip()
                 .expect("conversion failed, vertex was not a Trip");
             todo!("get neighbors along edge 'vehicle' for type 'Trip'")
@@ -86,7 +86,6 @@ pub(super) fn resolve_vehicle_edge<'a, V: AsVertex<Vertex<'a>> + 'a>(
 }
 
 mod vehicle {
-    use std::iter;
 
     use trustfall::provider::{
         resolve_neighbors_with, AsVertex, ContextIterator, ContextOutcomeIterator, ResolveEdgeInfo,
