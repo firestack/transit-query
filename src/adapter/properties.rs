@@ -48,6 +48,11 @@ pub(super) fn resolve_trip_property<'a, V: AsVertex<Vertex<'a>> + 'a>(
         "id" => resolve_property_with(contexts, field_property!(as_trip, trip_id)),
         "direction_id" => resolve_property_with(contexts, field_property!(as_trip, direction_id)),
         "trip_headsign" => resolve_property_with(contexts, field_property!(as_trip, trip_headsign)),
+        "start_time" => resolve_property_with(contexts, field_property!(as_trip, start_time)),
+        "start_date" => resolve_property_with(contexts, field_property!(as_trip, start_date)),
+        "schedule_relationship" => {
+            resolve_property_with(contexts, field_property!(as_trip, schedule_relationship))
+        }
         "route_id" => resolve_property_with(contexts, field_property!(as_trip, route_id)),
         _ => {
             unreachable!("attempted to read unexpected property '{property_name}' on type 'Trip'")
