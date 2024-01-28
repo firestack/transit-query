@@ -1,6 +1,6 @@
 use trustfall::provider::{ResolveInfo, VertexIterator};
 
-use crate::VehiclePositions;
+use crate::gtfs_realtime::VehiclePositions;
 
 use super::vertex::Vertex;
 
