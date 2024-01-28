@@ -10,7 +10,7 @@ pub(crate) struct Position {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct TripDescriptor {
+pub(crate) struct TripDescriptor {
     pub(crate) direction_id: i64,
     route_id: String,
     pub(crate) schedule_relationship: Option<String>,
@@ -20,7 +20,7 @@ pub struct TripDescriptor {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct CarriageDetails {
+pub(crate) struct CarriageDetails {
     carriage_sequence: i64,
     pub(crate) id: Option<String>,
     pub(crate) label: String,
@@ -35,7 +35,7 @@ pub(crate) struct VehicleDescriptor {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct VehiclePosition {
+pub(crate) struct VehiclePosition {
     pub(crate) current_status: Option<String>,
     pub(crate) current_stop_sequence: Option<i64>,
     pub(crate) occupancy_percentage: Option<i64>,
@@ -55,7 +55,7 @@ pub(crate) struct VehicleEntity {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct VehiclePositions {
+pub(crate) struct VehiclePositions {
     pub(crate) entity: Vec<VehicleEntity>,
 }
 
@@ -73,7 +73,7 @@ struct StopTimeUpdate {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-struct TripUpdate {
+pub(crate) struct TripUpdate {
     stop_time_update: Option<Vec<StopTimeUpdate>>,
     timestamp: Option<i64>,
     trip: Trip,
@@ -87,6 +87,6 @@ pub(crate) struct TripEntity {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub struct TripUpdates {
+pub(crate) struct TripUpdates {
     pub(crate) entity: Vec<TripEntity>,
 }
