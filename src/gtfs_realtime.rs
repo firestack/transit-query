@@ -60,12 +60,6 @@ pub struct VehiclePositions {
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
-pub(crate) struct TripEntity {
-    id: String,
-    trip_update: TripUpdate,
-}
-
-#[derive(Serialize, Deserialize, Debug, Clone)]
 struct StopTimeEvent {
     time: i64,
 }
@@ -82,6 +76,12 @@ struct TripUpdate {
     timestamp: Option<i64>,
     trip: Trip,
     vehicle: Option<VehicleDescriptor>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub(crate) struct TripEntity {
+    id: String,
+    pub(crate) trip_update: TripUpdate,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
