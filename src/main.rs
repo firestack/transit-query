@@ -34,17 +34,22 @@ struct CliArgs {
 }
 
 fn main() {
-    let args = CliArgs::parse();
-
-    let file_contents = std::fs::read_to_string(&args.query_file)
-        .unwrap_or_else(|_| panic!("Could not open file {}", args.query_file.display()));
+    let CliArgs {
+        gtfs_path,
+        query_file,
+    } = CliArgs::parse();
 
     let contents = get_feed("https://cdn.mbta.com/realtime/VehiclePositions.json");
     let trip_updates = get_feed("https://cdn.mbta.com/realtime/TripUpdates.json");
-    let schedule = GtfsSchedule::from_path(&args.gtfs_path);
+
+    let schedule = GtfsSchedule::from_path(&gtfs_path);
+
     let adapter = Adapter::new(&contents, &trip_updates, &schedule);
+
+    let query_string = std::fs::read_to_string(&query_file)
+        .unwrap_or_else(|_| panic!("Could not open file {}", query_file.display()));
     let variables: BTreeMap<Arc<str>, Arc<str>> = BTreeMap::new(); // btreemap! {Arc::from("minLabel") => Arc::from("3900")};
-    execute_query(Adapter::schema(), adapter.into(), &file_contents, variables)
+    execute_query(Adapter::schema(), adapter.into(), &query_string, variables)
         .expect("query failed to parse")
         .map(|v| {
             v.into_iter()
