@@ -63,6 +63,7 @@ pub struct VehiclePositions {
 struct StopTimeEvent {
     time: i64,
 }
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 struct StopTimeUpdate {
     arrival: Option<StopTimeEvent>,
@@ -70,6 +71,7 @@ struct StopTimeUpdate {
     stop_id: String,
     stop_sequence: i64,
 }
+
 #[derive(Serialize, Deserialize, Debug, Clone)]
 struct TripUpdate {
     stop_time_update: Option<Vec<StopTimeUpdate>>,
