@@ -16,7 +16,7 @@ pub(super) fn resolve_trip_edge<'a, V: AsVertex<Vertex<'a>> + 'a>(
 ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Vertex<'a>>> {
     match edge_name {
         "route" => trip::route(&schedule.routes, contexts, resolve_info),
-        "vehicle" => trip::vehicle(contexts, resolve_info),
+        "vehicles" => trip::vehicle(contexts, resolve_info),
         _ => {
             unreachable!("attempted to resolve unexpected edge '{edge_name}' on type 'Trip'")
         }
