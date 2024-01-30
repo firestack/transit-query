@@ -63,7 +63,6 @@ pub(crate) struct StopTime {
     pub(crate) trip_id: String,
 }
 
-
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub(crate) struct Trip {
     pub(super) route_id: String,
