@@ -41,6 +41,7 @@ directive @transform(
 
 type RootSchemaQuery {
   Vehicle: [Vehicle!]!
+  Trip: [Trip!]!
 }
 
 type Trip {

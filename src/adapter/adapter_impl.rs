@@ -57,7 +57,7 @@ impl<'a> trustfall::provider::Adapter<'a> for Adapter<'a> {
     ) -> VertexIterator<'a, Self::Vertex> {
         match edge_name.as_ref() {
             "Vehicle" => super::entrypoints::vehicle(self.vehicle_positions, resolve_info),
-            // "Trip" => super::entrypoints::trip(self.trip_updates, resolve_info),
+            "Trip" => super::entrypoints::trip(self.gtfs_schedule, resolve_info),
             _ => {
                 unreachable!(
                     "attempted to resolve starting vertices for unexpected edge name: {edge_name}"

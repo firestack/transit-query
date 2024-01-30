@@ -1,0 +1,25 @@
+{
+  Trip {
+    trip_headsign @output
+    schedule_relationship @output
+    route {
+        route_name: long_name @output
+    }
+
+    vehicles {
+        label @output
+        id @output
+        timestamp @output
+        stop { stop_name: name @output}
+        latitude @output
+        longitude @output
+
+
+        multi_carriage_details {
+            carriage_label: label @output
+            carriage_occupancy_percentage: occupancy_percentage @output
+            carriage_occupancy_status: occupancy_status @output
+        }
+    }
+  }
+}
