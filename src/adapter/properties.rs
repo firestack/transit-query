@@ -1,7 +1,7 @@
 use trustfall::{
     provider::{
-        field_property, resolve_property_with, AsVertex, ContextIterator,
-        ContextOutcomeIterator, ResolveInfo,
+        field_property, resolve_property_with, AsVertex, ContextIterator, ContextOutcomeIterator,
+        ResolveInfo,
     },
     FieldValue,
 };
@@ -54,6 +54,7 @@ pub(super) fn resolve_trip_property<'a, V: AsVertex<Vertex<'a>> + 'a>(
             resolve_property_with(contexts, field_property!(as_trip, schedule_relationship))
         }
         "route_id" => resolve_property_with(contexts, field_property!(as_trip, route_id)),
+        "timestamp" => resolve_property_with(contexts, field_property!(as_trip_update, timestamp)),
         _ => {
             unreachable!("attempted to read unexpected property '{property_name}' on type 'Trip'")
         }

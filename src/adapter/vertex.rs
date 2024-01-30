@@ -1,5 +1,5 @@
 use crate::{
-    gtfs_realtime::{CarriageDetails, TripDescriptor, VehiclePosition},
+    gtfs_realtime::{CarriageDetails, TripDescriptor, TripUpdate, VehiclePosition},
     gtfs_schedule::{Route, Stop, Trip},
 };
 
@@ -11,6 +11,7 @@ pub(crate) enum Vertex<'a> {
     Trip(&'a Trip),
     #[allow(dead_code)]
     TripDescriptor(&'a TripDescriptor),
+    TripUpdate(&'a TripUpdate),
     Vehicle(&'a VehiclePosition),
     CarriageDetails(&'a CarriageDetails),
 }
