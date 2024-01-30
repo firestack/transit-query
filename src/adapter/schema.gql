@@ -66,11 +66,11 @@ type Vehicle {
   timestamp: Int
   occupancy_percentage: Int
   occupancy_status: String
-  multi_carriage_details: [CarriageDetails!]
 
   stop: Stop
   trip: Trip
   trip_descriptor: Trip
+  multi_carriage_details: [CarriageDetails!]
 }
 
 type CarriageDetails {
