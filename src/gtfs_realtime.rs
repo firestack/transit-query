@@ -11,7 +11,7 @@ pub(crate) struct Position {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub(crate) struct TripDescriptor {
-    pub(crate) direction_id: i64,
+    pub(crate) direction_id: Option<i64>,
     route_id: String,
     pub(crate) schedule_relationship: Option<String>,
     pub(crate) start_date: Option<String>,
