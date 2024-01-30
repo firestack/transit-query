@@ -12,15 +12,11 @@ pub(crate) struct GtfsSchedule {
 
 impl GtfsSchedule {
     pub(crate) fn from_path(path: &Path) -> Self {
-        let routes = deserialize_file(path, "routes.txt");
-        let stops = deserialize_file(path, "stops.txt");
-        let trips = deserialize_file(path, "trips.txt");
-        let stop_times = deserialize_file(path, "stop_times.txt");
         Self {
-            routes,
-            stops,
-            trips,
-            stop_times,
+            routes: deserialize_file(path, "routes.txt"),
+            stops: deserialize_file(path, "stops.txt"),
+            trips: deserialize_file(path, "trips.txt"),
+            stop_times: deserialize_file(path, "stop_times.txt"),
         }
     }
 }
