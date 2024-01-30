@@ -120,14 +120,8 @@ impl<'a> trustfall::provider::Adapter<'a> for Adapter<'a> {
         resolve_info: &ResolveEdgeInfo,
     ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Self::Vertex>> {
         match type_name.as_ref() {
-            "Trip" => super::edges::resolve_trip_edge(
-                self.gtfs_schedule,
-                contexts,
-                edge_name,
-                parameters,
-                resolve_info,
-            ),
-            "TripDescriptor" => super::edges::resolve_trip_edge(
+            "Trip" | "TripDescriptor" => super::edges::resolve_trip_edge(
+                self.vehicle_positions,
                 self.gtfs_schedule,
                 contexts,
                 edge_name,
