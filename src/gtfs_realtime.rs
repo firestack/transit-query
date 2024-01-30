@@ -75,7 +75,7 @@ struct StopTimeUpdate {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub(crate) struct TripUpdate {
     stop_time_update: Option<Vec<StopTimeUpdate>>,
-    timestamp: Option<i64>,
+    pub(crate) timestamp: Option<i64>,
     trip: Trip,
     vehicle: Option<VehicleDescriptor>,
 }
