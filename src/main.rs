@@ -16,10 +16,20 @@ use clap::Parser;
 
 #[derive(Parser, Debug)]
 struct CliArgs {
-    #[arg(default_value = "./query.gql", env = "QUERY_FILE")]
+    #[arg(
+        short = 'q',
+        long = "query",
+        default_value = "./query.gql",
+        env = "QUERY_FILE"
+    )]
     query_file: PathBuf,
 
-    #[arg(default_value = "./MBTA_GTFS", env = "GTFS")]
+    #[arg(
+        short = 's',
+        long = "gtfs-static",
+        default_value = "./MBTA_GTFS",
+        env = "GTFS_STATIC"
+    )]
     gtfs_path: PathBuf,
 }
 
