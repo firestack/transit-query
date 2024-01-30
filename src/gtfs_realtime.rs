@@ -4,7 +4,7 @@ use crate::gtfs_schedule::Trip;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub(crate) struct Position {
-    bearing: i64,
+    pub(crate) bearing: Option<i64>,
     pub(crate) latitude: f64,
     pub(crate) longitude: f64,
 }
