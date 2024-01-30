@@ -65,7 +65,7 @@ pub(crate) struct Trip {
     pub(super) service_id: Option<String>,
     pub(super) trip_id: String,
     pub(super) trip_headsign: Option<String>,
-    pub(super) direction_id: i64,
+    pub(super) direction_id: Option<i64>,
     pub(super) shape_id: Option<String>,
     pub(super) block_id: Option<String>,
     pub(super) start_time: Option<String>,
