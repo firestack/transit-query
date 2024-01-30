@@ -10,7 +10,6 @@ use crate::adapter::Adapter;
 mod adapter;
 mod gtfs_realtime;
 mod gtfs_schedule;
-pub use gtfs_realtime::*;
 
 use clap::Parser;
 

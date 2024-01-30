@@ -1,7 +1,7 @@
 use trustfall::{
     provider::{
-        field_property, resolve_property_with, AsVertex, ContextIterator, ContextOutcomeIterator,
-        ResolveInfo,
+        field_property, resolve_property_with, AsVertex, ContextIterator,
+        ContextOutcomeIterator, ResolveInfo,
     },
     FieldValue,
 };
