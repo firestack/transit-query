@@ -3,11 +3,12 @@ use trustfall::provider::{
     VertexIterator,
 };
 
-use crate::gtfs_schedule::GtfsSchedule;
+use crate::{gtfs_realtime::VehiclePositions, gtfs_schedule::GtfsSchedule};
 
 use super::vertex::Vertex;
 
 pub(super) fn resolve_trip_edge<'a, V: AsVertex<Vertex<'a>> + 'a>(
+    vehicles: &'a VehiclePositions,
     schedule: &'a GtfsSchedule,
     contexts: ContextIterator<'a, V>,
     edge_name: &str,
@@ -16,7 +17,7 @@ pub(super) fn resolve_trip_edge<'a, V: AsVertex<Vertex<'a>> + 'a>(
 ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Vertex<'a>>> {
     match edge_name {
         "route" => trip::route(&schedule.routes, contexts, resolve_info),
-        "vehicles" => trip::vehicle(contexts, resolve_info),
+        "vehicles" => trip::vehicle(vehicles, contexts, resolve_info),
         _ => {
             unreachable!("attempted to resolve unexpected edge '{edge_name}' on type 'Trip'")
         }
@@ -29,7 +30,10 @@ mod trip {
         VertexIterator,
     };
 
-    use crate::gtfs_schedule::Route;
+    use crate::{
+        gtfs_realtime::VehiclePositions,
+        gtfs_schedule::{Route, Trip},
+    };
 
     use super::super::vertex::Vertex;
 
@@ -55,14 +59,26 @@ mod trip {
     }
 
     pub(super) fn vehicle<'a, V: AsVertex<Vertex<'a>> + 'a>(
+        vehicles: &'a VehiclePositions,
         contexts: ContextIterator<'a, V>,
         _resolve_info: &ResolveEdgeInfo,
     ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Vertex<'a>>> {
         resolve_neighbors_with(contexts, |vertex| {
-            let _vertex = vertex
+            let Trip { trip_id, .. } = &vertex
                 .as_trip()
                 .expect("conversion failed, vertex was not a Trip");
-            todo!("get neighbors along edge 'vehicle' for type 'Trip'")
+
+            let matching_vehicles = vehicles
+                .entity
+                .iter()
+                .filter_map(move |vertex| match &vertex.vehicle.trip {
+                    Some(vehicle_trip) if vehicle_trip.trip_id.eq(trip_id) => {
+                        Some(Vertex::Vehicle(&vertex.vehicle))
+                    }
+                    _ => None,
+                });
+
+            Box::new(matching_vehicles)
         })
     }
 }
