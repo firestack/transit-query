@@ -1,10 +1,9 @@
 use serde::{Deserialize, Serialize};
 
-use gtfs_schedule_types::records::Trips;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub(crate) struct Position {
-    bearing: i64,
+    bearing: Option<i64>,
     pub(crate) latitude: f64,
     pub(crate) longitude: f64,
 }
@@ -24,7 +23,7 @@ pub struct CarriageDetails {
     carriage_sequence: i64,
     pub(crate) id: Option<String>,
     pub(crate) label: String,
-    pub(crate) occupancy_percentage: i64,
+    pub(crate) occupancy_percentage: Option<i64>,
     pub(crate) occupancy_status: String,
 }
 
@@ -32,6 +31,20 @@ pub struct CarriageDetails {
 pub(crate) struct VehicleDescriptor {
     pub(crate) id: String,
     pub(crate) label: Option<String>,
+}
+
+#[derive(Serialize, Deserialize, Debug, Clone)]
+pub(crate) struct Trip {
+    pub(super) route_id: String,
+    pub(super) service_id: Option<String>,
+    pub(super) trip_id: String,
+    pub(super) trip_headsign: Option<String>,
+    pub(super) direction_id: i64,
+    pub(super) shape_id: Option<String>,
+    pub(super) block_id: Option<String>,
+    pub(super) start_time: Option<String>,
+    pub(super) start_date: Option<String>,
+    pub(super) schedule_relationship: Option<String>,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -44,7 +57,7 @@ pub struct VehiclePosition {
     pub(crate) position: Position,
     pub(crate) stop_id: Option<String>,
     pub(crate) timestamp: i64,
-    pub(crate) trip: Option<Trips>,
+    pub(crate) trip: Option<Trip>,
     pub(crate) vehicle: VehicleDescriptor,
 }
 
@@ -80,7 +93,7 @@ struct StopTimeUpdate {
 struct TripUpdate {
     stop_time_update: Option<Vec<StopTimeUpdate>>,
     timestamp: Option<i64>,
-    trip: Trips,
+    trip: Trip,
     vehicle: Option<VehicleDescriptor>,
 }
 

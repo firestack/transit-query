@@ -3,12 +3,12 @@ use trustfall::provider::{
     VertexIterator,
 };
 
-use crate::gtfs_schedule::GtfsSchedule;
+use gtfs_schedule_types::Dataset;
 
 use super::vertex::Vertex;
 
 pub(super) fn resolve_trip_edge<'a, V: AsVertex<Vertex<'a>> + 'a>(
-    schedule: &'a GtfsSchedule,
+    schedule: &'a Dataset,
     contexts: ContextIterator<'a, V>,
     edge_name: &str,
     _parameters: &EdgeParameters,
@@ -29,12 +29,12 @@ mod trip {
         VertexIterator,
     };
 
-    use crate::gtfs_schedule::Route;
+    use gtfs_schedule_types::records::Routes;
 
     use super::super::vertex::Vertex;
 
     pub(super) fn route<'a, V: AsVertex<Vertex<'a>> + 'a>(
-        routes: &'a [Route],
+        routes: &'a [Routes],
         contexts: ContextIterator<'a, V>,
         _resolve_info: &ResolveEdgeInfo,
     ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Vertex<'a>>> {
@@ -68,7 +68,7 @@ mod trip {
 }
 
 pub(super) fn resolve_vehicle_edge<'a, V: AsVertex<Vertex<'a>> + 'a>(
-    schedule: &'a GtfsSchedule,
+    schedule: &'a Dataset,
     contexts: ContextIterator<'a, V>,
     edge_name: &str,
     _parameters: &EdgeParameters,
@@ -94,13 +94,14 @@ mod vehicle {
 
     use crate::{
         gtfs_realtime::VehiclePosition,
-        gtfs_schedule::{Stop, Trip},
     };
+    use gtfs_schedule_types::records::{Stops, Trips};
+
 
     use super::super::vertex::Vertex;
 
     pub(super) fn stop<'a, V: AsVertex<Vertex<'a>> + 'a>(
-        stops: &'a [Stop],
+        stops: &'a [Stops],
         contexts: ContextIterator<'a, V>,
         _resolve_info: &ResolveEdgeInfo,
     ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Vertex<'a>>> {
@@ -124,7 +125,7 @@ mod vehicle {
     }
 
     pub(super) fn trip<'a, V: AsVertex<Vertex<'a>> + 'a>(
-        trips: &'a [Trip],
+        trips: &'a [Trips],
         contexts: ContextIterator<'a, V>,
         _resolve_info: &ResolveEdgeInfo,
     ) -> ContextOutcomeIterator<'a, V, VertexIterator<'a, Vertex<'a>>> {
