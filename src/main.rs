@@ -40,7 +40,7 @@ fn main() {
     let contents = get_feed("https://cdn.mbta.com/realtime/VehiclePositions.json");
     let trip_updates = get_feed("https://cdn.mbta.com/realtime/TripUpdates.json");
 
-    let schedule = gtfs_schedule_types::Dataset::read_from_path(&gtfs_path);
+    let schedule = gtfs_schedule_types::Dataset::read_from_path(&gtfs_path).expect("could not read dataset");
 
     let adapter = Adapter::new(&contents, &trip_updates, &schedule);
 

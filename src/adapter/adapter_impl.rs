@@ -9,8 +9,10 @@ use trustfall::{
     FieldValue, Schema,
 };
 
+use gtfs_schedule_types::Dataset;
+
 use crate::{
-    gtfs_realtime::TripUpdates, gtfs_realtime::VehiclePositions, gtfs_schedule::GtfsSchedule,
+    gtfs_realtime::TripUpdates, gtfs_realtime::VehiclePositions,
 };
 
 use super::vertex::Vertex;
@@ -23,7 +25,7 @@ pub(crate) struct Adapter<'a> {
     vehicle_positions: &'a VehiclePositions,
     #[allow(dead_code)]
     trip_updates: &'a TripUpdates,
-    gtfs_schedule: &'a GtfsSchedule,
+    gtfs_schedule: &'a Dataset,
 }
 
 impl<'a> Adapter<'a> {
@@ -36,7 +38,7 @@ impl<'a> Adapter<'a> {
     pub(crate) fn new(
         vehicle_positions: &'a VehiclePositions,
         trip_updates: &'a TripUpdates,
-        gtfs_schedule: &'a GtfsSchedule,
+        gtfs_schedule: &'a Dataset,
     ) -> Self {
         Self {
             vehicle_positions,
