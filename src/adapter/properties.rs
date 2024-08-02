@@ -93,26 +93,26 @@ pub(super) fn resolve_vehicle_property<'a, V: AsVertex<Vertex<'a>> + 'a>(
                 FieldValue::Float64(position.longitude)
             }),
         ),
-        "schedule_relationship" => resolve_property_with(
-            contexts,
-            field_property!(as_vehicle, trip, {
-                trip.as_ref()
-                    .map(|t| t.schedule_relationship.clone())
-                    .into()
-            }),
-        ),
-        "start_time" => resolve_property_with(
-            contexts,
-            field_property!(as_vehicle, trip, {
-                trip.as_ref().map(|t| t.start_time.clone()).into()
-            }),
-        ),
-        "start_date" => resolve_property_with(
-            contexts,
-            field_property!(as_vehicle, trip, {
-                trip.as_ref().map(|t| t.start_date.clone()).into()
-            }),
-        ),
+        //"schedule_relationship" => resolve_property_with(
+        //    contexts,
+        //    field_property!(as_vehicle, trip, {
+        //        trip.as_ref()
+        //            .map(|_| None)
+        //            .into()
+        //    }),
+        //),
+        //"start_time" => resolve_property_with(
+        //    contexts,
+        //    field_property!(as_vehicle, trip, {
+        //        trip.as_ref().map(|_| None).into()
+        //    }),
+        //),
+        //"start_date" => resolve_property_with(
+        //    contexts,
+        //    field_property!(as_vehicle, trip, {
+        //        trip.as_ref().map(|_| None).into()
+        //    }),
+        //),
         "occupancy_percentage" => {
             resolve_property_with(contexts, field_property!(as_vehicle, occupancy_percentage))
         }
