@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::gtfs_schedule::Trip;
+use gtfs_schedule_types::records::Trips;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub(crate) struct Position {
@@ -44,7 +44,7 @@ pub struct VehiclePosition {
     pub(crate) position: Position,
     pub(crate) stop_id: Option<String>,
     pub(crate) timestamp: i64,
-    pub(crate) trip: Option<Trip>,
+    pub(crate) trip: Option<Trips>,
     pub(crate) vehicle: VehicleDescriptor,
 }
 
@@ -80,7 +80,7 @@ struct StopTimeUpdate {
 struct TripUpdate {
     stop_time_update: Option<Vec<StopTimeUpdate>>,
     timestamp: Option<i64>,
-    trip: Trip,
+    trip: Trips,
     vehicle: Option<VehicleDescriptor>,
 }
 

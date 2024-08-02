@@ -1,6 +1,5 @@
 use std::{collections::BTreeMap, path::PathBuf, sync::Arc};
 
-use gtfs_schedule::GtfsSchedule;
 
 use serde::de::DeserializeOwned;
 use trustfall::{execute_query, TransparentValue};
@@ -9,7 +8,7 @@ use crate::adapter::Adapter;
 
 mod adapter;
 mod gtfs_realtime;
-mod gtfs_schedule;
+pub use gtfs_realtime::*;
 
 use clap::Parser;
 
@@ -41,7 +40,7 @@ fn main() {
     let contents = get_feed("https://cdn.mbta.com/realtime/VehiclePositions.json");
     let trip_updates = get_feed("https://cdn.mbta.com/realtime/TripUpdates.json");
 
-    let schedule = GtfsSchedule::from_path(&gtfs_path);
+    let schedule = gtfs_schedule_types::Dataset::read_from_path(&gtfs_path);
 
     let adapter = Adapter::new(&contents, &trip_updates, &schedule);
 
